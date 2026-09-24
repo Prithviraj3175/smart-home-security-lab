@@ -1,0 +1,884 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Pirata+One&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --red: #ff1744;
+    --deep-red: #650014;
+    --black: #020202;
+    --gold: #d6b36a;
+    --text: #eeeeee;
+    --muted: #777;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body.pirate-login {
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.96) 0%,
+            rgba(0,0,0,.78) 38%,
+            rgba(0,0,0,.28) 72%,
+            rgba(0,0,0,.65) 100%
+        ),
+        url("pirate-bg.png") center center / cover fixed no-repeat;
+
+    background-color: #000;
+
+    color: var(--text);
+
+    font-family: "Cinzel", serif;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   DARK CINEMATIC OVERLAY
+========================================= */
+
+.pirate-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 73% 45%,
+            rgba(255,0,40,.18),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,0,20,.08),
+            transparent 30%
+        );
+
+    z-index: 0;
+}
+
+
+/* =========================================
+   ATMOSPHERIC MIST
+========================================= */
+
+.mist {
+    position: fixed;
+
+    width: 420px;
+    height: 420px;
+
+    border-radius: 50%;
+
+    background: rgba(255,0,35,.10);
+
+    filter: blur(100px);
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    animation: mistMove 9s ease-in-out infinite;
+}
+
+.mist-one {
+    right: 5%;
+    top: 10%;
+}
+
+.mist-two {
+    left: 5%;
+    bottom: -15%;
+
+    animation-delay: -4s;
+}
+
+@keyframes mistMove {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+        opacity: .35;
+    }
+
+    50% {
+        transform: translate(-30px, 20px);
+        opacity: .65;
+    }
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.login-stage {
+    position: relative;
+
+    z-index: 5;
+
+    min-height: calc(100vh - 55px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 60px;
+
+    padding:
+        50px
+        7vw;
+}
+
+
+/* =========================================
+   LEFT PIRATE TITLE
+========================================= */
+
+.pirate-title {
+    max-width: 560px;
+
+    animation:
+        titleEnter 1s ease both;
+}
+
+@keyframes titleEnter {
+
+    from {
+        opacity: 0;
+        transform: translateX(-35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.title-mark {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border:
+        1px solid
+        rgba(255,23,68,.65);
+
+    border-radius: 50%;
+
+    color: var(--red);
+
+    font-size: 36px;
+
+    text-shadow:
+        0 0 12px var(--red),
+        0 0 35px rgba(255,0,40,.55);
+
+    box-shadow:
+        0 0 30px rgba(255,0,40,.15);
+
+    animation: markPulse 3s infinite;
+}
+
+@keyframes markPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 20px rgba(255,0,40,.12);
+    }
+
+    50% {
+        box-shadow:
+            0 0 45px rgba(255,0,40,.35);
+    }
+}
+
+.title-line {
+    width: 110px;
+    height: 2px;
+
+    margin-bottom: 17px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--red),
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px var(--red);
+}
+
+.pirate-title > span {
+    color: #a5a5a5;
+
+    font-size: 10px;
+
+    letter-spacing: 5px;
+}
+
+.pirate-title h1 {
+    margin-top: 13px;
+
+    color: white;
+
+    font-family: "Pirata One", "Cinzel", serif;
+
+    font-size: clamp(60px, 8vw, 105px);
+
+    line-height: .85;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        3px 3px 0 #220006,
+        0 0 25px rgba(255,0,40,.2);
+}
+
+.pirate-title h2 {
+    margin-top: 13px;
+
+    color: var(--red);
+
+    font-size: clamp(24px, 3vw, 40px);
+
+    letter-spacing: 7px;
+
+    text-shadow:
+        0 0 20px rgba(255,0,40,.45);
+}
+
+.pirate-title p {
+    margin-top: 22px;
+
+    color: #777;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+}
+
+
+/* =========================================
+   LOGIN PANEL
+========================================= */
+
+.login-panel {
+    position: relative;
+
+    width: 420px;
+
+    flex-shrink: 0;
+
+    padding: 34px;
+
+    border:
+        1px solid
+        rgba(255,23,68,.45);
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7,7,7,.94),
+            rgba(0,0,0,.84)
+        );
+
+    backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.75),
+        0 0 45px rgba(255,0,40,.08);
+
+    animation:
+        panelEnter 1s .15s ease both;
+
+    overflow: hidden;
+}
+
+@keyframes panelEnter {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.login-panel::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--red),
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px var(--red);
+}
+
+.login-panel::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255,0,40,.10),
+            transparent 40%
+        );
+}
+
+
+/* =========================================
+   PANEL HEADER
+========================================= */
+
+.panel-skull {
+    position: absolute;
+
+    right: 20px;
+    top: 17px;
+
+    color: rgba(255,23,68,.13);
+
+    font-size: 65px;
+
+    line-height: 1;
+
+    pointer-events: none;
+}
+
+.panel-header {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--red);
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #35ff91;
+
+    box-shadow:
+        0 0 10px #35ff91;
+}
+
+.login-panel h3 {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 22px;
+
+    font-size: 25px;
+
+    letter-spacing: 1px;
+}
+
+.panel-subtitle {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 8px;
+
+    margin-bottom: 25px;
+
+    color: #666;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.login-error {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+
+    padding: 11px 12px;
+
+    border:
+        1px solid
+        rgba(255,23,68,.5);
+
+    border-radius: 7px;
+
+    background:
+        rgba(255,0,35,.08);
+
+    color: #ff6680;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+}
+
+.login-error span {
+    color: var(--red);
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.field {
+    position: relative;
+
+    z-index: 2;
+
+    margin-bottom: 18px;
+}
+
+.field label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #aaa;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+.input-wrap {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+
+    left: 15px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: var(--red);
+
+    font-size: 16px;
+
+    pointer-events: none;
+}
+
+.input-wrap input {
+    width: 100%;
+
+    height: 48px;
+
+    padding:
+        0 14px 0 43px;
+
+    border:
+        1px solid
+        #292929;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background:
+        rgba(255,255,255,.035);
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    transition: .25s;
+}
+
+.input-wrap input::placeholder {
+    color: #4f4f4f;
+}
+
+.input-wrap input:focus {
+    border-color: var(--red);
+
+    background:
+        rgba(255,0,35,.045);
+
+    box-shadow:
+        0 0 20px rgba(255,0,40,.10);
+}
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+.login-panel button {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 8px;
+
+    padding: 0 17px;
+
+    border:
+        1px solid
+        var(--red);
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #700016,
+            #bd002b
+        );
+
+    color: white;
+
+    font-family: "Cinzel", serif;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 25px rgba(255,0,40,.14);
+
+    transition: .25s;
+}
+
+.login-panel button b {
+    font-size: 22px;
+
+    font-family: Arial, sans-serif;
+
+    transition: .25s;
+}
+
+.login-panel button:hover {
+    background:
+        linear-gradient(
+            90deg,
+            #a00022,
+            #ff1744
+        );
+
+    box-shadow:
+        0 0 35px rgba(255,0,40,.35);
+
+    transform: translateY(-2px);
+}
+
+.login-panel button:hover b {
+    transform: translateX(5px);
+}
+
+
+/* =========================================
+   ACCESS WARNING
+========================================= */
+
+.access-warning {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 23px;
+
+    color: #6b6b6b;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+}
+
+.access-warning span {
+    color: var(--red);
+
+    opacity: .7;
+}
+
+
+/* =========================================
+   PANEL FOOTER
+========================================= */
+
+.panel-footer {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 22px;
+
+    padding-top: 15px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.05);
+
+    color: #4f4f4f;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+.panel-footer strong {
+    color: #35ff91;
+}
+
+.panel-footer i {
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #444;
+}
+
+
+/* =========================================
+   BOTTOM
+========================================= */
+
+.login-bottom {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 10;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    padding: 14px 20px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.05);
+
+    background:
+        rgba(0,0,0,.70);
+
+    color: #555;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    backdrop-filter: blur(8px);
+}
+
+.login-bottom span:first-child {
+    color: var(--red);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1050px) {
+
+    .login-stage {
+        padding:
+            40px 35px;
+    }
+
+    .pirate-title h1 {
+        font-size: 70px;
+    }
+
+    .login-panel {
+        width: 380px;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    body.pirate-login {
+        overflow-y: auto;
+    }
+
+    .login-stage {
+        min-height: auto;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        padding:
+            55px 20px 80px;
+
+        gap: 35px;
+    }
+
+    .pirate-title {
+        text-align: center;
+    }
+
+    .title-mark {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .title-line {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .pirate-title h1 {
+        font-size: 58px;
+    }
+
+    .pirate-title h2 {
+        font-size: 22px;
+
+        letter-spacing: 4px;
+    }
+
+    .login-panel {
+        width: min(420px, 100%);
+    }
+
+    .login-bottom {
+        display: none;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .login-panel {
+        padding: 26px 21px;
+    }
+
+    .pirate-title h1 {
+        font-size: 48px;
+    }
+
+    .pirate-title h2 {
+        font-size: 18px;
+    }
+}
